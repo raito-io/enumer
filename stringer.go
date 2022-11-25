@@ -50,6 +50,7 @@ var (
 	yaml            = flag.Bool("yaml", false, "if true, yaml marshaling methods will be generated. Default: false")
 	text            = flag.Bool("text", false, "if true, text marshaling methods will be generated. Default: false")
 	gqlgen          = flag.Bool("gqlgen", false, "if true, GraphQL marshaling methods for gqlgen will be generated. Default: false")
+	dynamodbav      = flag.Bool("dynamodbav", false, "if true, DynamoDB attribute values marshaling methods will be generated. Default: false")
 	altValuesFunc   = flag.Bool("values", false, "if true, alternative string values method will be generated. Default: false")
 	output          = flag.String("output", "", "output file name; default srcdir/<type>_string.go")
 	transformMethod = flag.String("transform", "noop", "enum item name transformation method. Default: noop")
@@ -129,11 +130,14 @@ func main() {
 		g.Printf("\t\"io\"\n")
 		g.Printf("\t\"strconv\"\n")
 	}
+	if *dynamodbav {
+		g.Printf("\t\"github.com/aws/aws-sdk-go-v2/service/dynamodb/types\"\n")
+	}
 	g.Printf(")\n")
 
 	// Run generate for each type.
 	for _, typeName := range typs {
-		g.generate(typeName, *json, *yaml, *sql, *text, *gqlgen, *transformMethod, *trimPrefix, *addPrefix, *linecomment, *altValuesFunc)
+		g.generate(typeName, *json, *yaml, *sql, *text, *gqlgen, *dynamodbav, *transformMethod, *trimPrefix, *addPrefix, *linecomment, *altValuesFunc)
 	}
 
 	// Format the output.
@@ -391,7 +395,7 @@ func (g *Generator) prefixValueNames(values []Value, prefix string) {
 
 // generate produces the String method for the named type.
 func (g *Generator) generate(typeName string,
-	includeJSON, includeYAML, includeSQL, includeText, includeGQLGen bool,
+	includeJSON, includeYAML, includeSQL, includeText, includeGQLGen bool, includeDynamodbav bool,
 	transformMethod string, trimPrefix string, addPrefix string, lineComment bool, includeValuesMethod bool) {
 	values := make([]Value, 0, 100)
 	for _, file := range g.pkg.files {
@@ -460,6 +464,9 @@ func (g *Generator) generate(typeName string,
 	}
 	if includeGQLGen {
 		g.buildGQLGenMethods(runs, typeName)
+	}
+	if includeDynamodbav {
+		g.buildDynamodbAvMethods(runs, typeName)
 	}
 }
 

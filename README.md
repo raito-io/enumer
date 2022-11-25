@@ -1,6 +1,3 @@
-# Enumer [![GoDoc](https://godoc.org/github.com/dmarkham/enumer?status.svg)](https://godoc.org/github.com/dmarkham/enumer) [![Go Report Card](https://goreportcard.com/badge/github.com/dmarkham/enumer)](https://goreportcard.com/report/github.com/dmarkham/enumer) [![GitHub Release](https://img.shields.io/github/release/dmarkham/enumer.svg)](https://github.com/dmarkham/enumer/releases)[![Build Status](https://travis-ci.com/dmarkham/enumer.svg?branch=master)](https://travis-ci.com/dmarkham/enumer)
-
-
 Enumer is a tool to generate Go code that adds useful methods to Go enums (constants with a specific type).
 It started as a fork of [Rob Pike’s Stringer tool](https://godoc.org/golang.org/x/tools/cmd/stringer)
 maintained by [Álvaro López Espinosa](https://github.com/alvaroloes/enumer). 
@@ -21,6 +18,8 @@ Flags:
         transform each item name by adding a prefix. Default: ""
   -comment value
         comments to include in generated code, can repeat. Default: ""
+  -dynamodbav
+        if true, DynamoDB attribute values marshaling methods will be generated. Default: false
   -gqlgen
         if true, GraphQL marshaling methods for gqlgen will be generated. Default: false
   -json
