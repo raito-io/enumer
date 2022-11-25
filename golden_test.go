@@ -376,7 +376,7 @@ func runGoldenTest(t *testing.T, test Golden,
 	if err != nil {
 		t.Error(err)
 	}
-	g.parsePackage([]string{absFile}, nil)
+	g.parsePackage([]string{absFile})
 	// Extract the name and type of the constant from the first line.
 	tokens := strings.SplitN(test.input, " ", 3)
 	if len(tokens) != 3 {
