@@ -10,7 +10,7 @@
 package main
 
 import (
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -360,7 +360,7 @@ func runGoldenTest(t *testing.T, test Golden,
 	file := test.name + ".go"
 	input := "package test\n" + test.input
 
-	dir, err := ioutil.TempDir("", "stringer")
+	dir, err := os.MkdirTemp("", "stringer")
 	if err != nil {
 		t.Error(err)
 	}
@@ -372,11 +372,11 @@ func runGoldenTest(t *testing.T, test Golden,
 	}()
 
 	absFile := filepath.Join(dir, file)
-	err = ioutil.WriteFile(absFile, []byte(input), 0644)
+	err = os.WriteFile(absFile, []byte(input), 0644)
 	if err != nil {
 		t.Error(err)
 	}
-	g.parsePackage([]string{absFile}, nil)
+	g.parsePackage([]string{absFile})
 	// Extract the name and type of the constant from the first line.
 	tokens := strings.SplitN(test.input, " ", 3)
 	if len(tokens) != 3 {
@@ -401,7 +401,7 @@ func loadGolden(name string) string {
 		return ""
 	}
 	defer fh.Close()
-	b, err := ioutil.ReadAll(fh)
+	b, err := io.ReadAll(fh)
 	if err != nil {
 		return ""
 	}
