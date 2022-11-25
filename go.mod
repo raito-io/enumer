@@ -1,4 +1,4 @@
-module github.com/raito/enumer
+module github.com/raito-io/enumer
 
 require (
 	github.com/pascaldekloe/name v1.0.1
