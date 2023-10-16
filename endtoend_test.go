@@ -98,6 +98,9 @@ func TestEndToEnd(t *testing.T) {
 		case "transform_title.go":
 			typeName = "TitleCaseValue"
 			transformNameMethod = "title"
+		case "transform_title_lower.go":
+			typeName = "TitleCaseValue"
+			transformNameMethod = "title_lower"
 		case "transform_first.go":
 			typeName = "FirstCaseValue"
 			transformNameMethod = "first"

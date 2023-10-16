@@ -25,8 +25,6 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 	"golang.org/x/tools/go/packages"
 
 	"github.com/pascaldekloe/name"
@@ -333,13 +331,12 @@ func (g *Generator) transformValueNames(values []Value, transformMethod string) 
 	case "lower":
 		fn = strings.ToLower
 	case "title":
+		fn = strings.Title
+	case "title-lower", "title_lower":
 		fn = func(s string) string {
-			return cases.Title(language.English).String(s)
-		}
-	case "title-lower":
-		fn = func(s string) string {
-			title := []rune(cases.Title(language.English).String(s))
+			title := []rune(strings.Title(s))
 			title[0] = unicode.ToLower(title[0])
+			fmt.Printf("%s => %s\n", s, string(title))
 			return string(title)
 		}
 	case "first":
