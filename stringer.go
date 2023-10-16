@@ -336,7 +336,6 @@ func (g *Generator) transformValueNames(values []Value, transformMethod string) 
 		fn = func(s string) string {
 			title := []rune(strings.Title(s))
 			title[0] = unicode.ToLower(title[0])
-			fmt.Printf("%s => %s\n", s, string(title))
 			return string(title)
 		}
 	case "first":
