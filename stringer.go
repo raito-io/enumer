@@ -118,6 +118,7 @@ func main() {
 	g.Printf("import (\n")
 	g.Printf("\t\"fmt\"\n")
 	g.Printf("\t\"strings\"\n")
+	g.Printf("\t\"github.com/go-errors/errors\"\n")
 	if *sql {
 		g.Printf("\t\"database/sql/driver\"\n")
 	}

@@ -13,7 +13,7 @@ func (i %[1]s) MarshalGQL(w io.Writer) {
 func (i *%[1]s) UnmarshalGQL(value interface{}) error {
 	str, ok := value.(string)
 	if !ok {
-		return fmt.Errorf("%[1]s should be a string, got %%T", value)
+		return errors.Errorf("%[1]s should be a string, got %%T", value)
 	}
 
 	var err error

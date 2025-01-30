@@ -15,7 +15,7 @@ func %[1]sString(s string) (%[1]s, error) {
 	if val, ok := _%[1]sNameToValueMap[strings.ToLower(s)]; ok {
 		return val, nil
 	}
-	return 0, fmt.Errorf("%%s does not belong to %[1]s values", s)
+	return 0, errors.Errorf("%%s does not belong to %[1]s values", s)
 }
 `
 
@@ -162,7 +162,7 @@ func (i %[1]s) MarshalJSON() ([]byte, error) {
 func (i *%[1]s) UnmarshalJSON(data []byte) error {
 	var s string
 	if err := json.Unmarshal(data, &s); err != nil {
-		return fmt.Errorf("%[1]s should be a string, got %%s", data)
+		return errors.Errorf("%[1]s should be a string, got %%s", data)
 	}
 
 	var err error

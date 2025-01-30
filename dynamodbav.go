@@ -10,7 +10,7 @@ func (i %[1]s) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
 func (i *%[1]s) UnmarshalDynamoDBAttributeValue(value types.AttributeValue) error {
 	avS, ok := value.(*types.AttributeValueMemberS)
 	if !ok {
-		return fmt.Errorf("%[1]s should be a AttributeValueMemberS, got %%T", value)
+		return errors.Errorf("%[1]s should be a AttributeValueMemberS, got %%T", value)
 	}
 
 	var err error

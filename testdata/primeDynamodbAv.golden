@@ -101,7 +101,7 @@ func PrimeString(s string) (Prime, error) {
 	if val, ok := _PrimeNameToValueMap[strings.ToLower(s)]; ok {
 		return val, nil
 	}
-	return 0, fmt.Errorf("%s does not belong to Prime values", s)
+	return 0, errors.Errorf("%s does not belong to Prime values", s)
 }
 
 // PrimeValues returns all values of the enum
@@ -131,7 +131,7 @@ func (i Prime) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
 func (i *Prime) UnmarshalDynamoDBAttributeValue(value types.AttributeValue) error {
 	avS, ok := value.(*types.AttributeValueMemberS)
 	if !ok {
-		return fmt.Errorf("Prime should be a AttributeValueMemberS, got %T", value)
+		return errors.Errorf("Prime should be a AttributeValueMemberS, got %T", value)
 	}
 
 	var err error
