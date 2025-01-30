@@ -1,13 +1,11 @@
 module github.com/raito-io/enumer
 
 require (
+	github.com/go-errors/errors v1.5.1
 	github.com/pascaldekloe/name v1.0.1
 	golang.org/x/tools v0.17.0
 )
 
-require (
-	github.com/go-errors/errors v1.5.1 // indirect
-	golang.org/x/mod v0.15.0 // indirect
-)
+require golang.org/x/mod v0.15.0 // indirect
 
 go 1.21
