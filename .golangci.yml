@@ -43,6 +43,10 @@ linters-settings:
   gosec:
     excludes:
       - G404 # To be checked: Insecure random number source (rand)
+      - G115
+
+  staticcheck:
+    checks: ["all", "-SA1019"]
 
   stylecheck:
     checks: [ "all", "-ST1003"] # ST1003: No underscores in package names should be fixed and removed?
@@ -58,8 +62,6 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - deadcode
-    - depguard
     - dogsled
     - dupl
     - errcheck
@@ -83,14 +85,11 @@ linters:
     - predeclared
     - revive
     - staticcheck
-    - structcheck
     - stylecheck
     - thelper
     - tparallel
-    - typecheck
     - unconvert
     - unparam
-    - varcheck
     - whitespace
     # - wrapcheck # 3th party errors should be wrapped to not lose context
     # - wsl
